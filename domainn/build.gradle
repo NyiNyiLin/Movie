@@ -1,0 +1,15 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api Kotlin.stdblib_jdk
+    api CommonLibs.javaxInject
+
+    api ReactiveX.rxjava
+    api ReactiveX.rxKotlin
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
