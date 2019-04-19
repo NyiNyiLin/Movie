@@ -5,5 +5,5 @@ import com.nyi.domainn.model.Movie
 
 interface MovieNetworkDataSource {
 
-    fun getTrendingMovie(movieType :String, time : String) : List<Movie>
+    suspend fun getTrendingMovie(movieType :String, time : String) : List<Movie>
 }

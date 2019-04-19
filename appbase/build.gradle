@@ -61,6 +61,7 @@ dependencies {
     api project(path: ':domainn')
     api project(path: ':network')
     api project(path: ':data')
+    compile project(path: ':cache')
 }
 repositories {
     mavenCentral()

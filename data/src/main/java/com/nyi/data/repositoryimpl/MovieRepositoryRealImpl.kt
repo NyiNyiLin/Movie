@@ -1,5 +1,6 @@
 package com.nyi.data.repositoryimpl
 
+import com.nyi.data.datasource.MovieCacheDataSource
 import com.nyi.data.datasource.MovieNetworkDataSource
 import com.nyi.domainn.model.Movie
 import com.nyi.domainn.repository.MovieRepository
@@ -8,14 +9,23 @@ import javax.inject.Inject
 
 
 class MovieRepositoryRealImpl @Inject constructor(
-    private val movieNetworkDataSource: MovieNetworkDataSource)
+    private val movieNetworkDataSource: MovieNetworkDataSource,
+    private val movieCacheDataSource: MovieCacheDataSource
+)
     : MovieRepository {
 
-    override fun getTrendingMovie(movieType: String, time: String): Single<List<Movie>> {
+     /*fun getTrendingMovieee(movieType: String, time: String): Single<List<Movie>> {
 
         return Single.fromCallable{
             movieNetworkDataSource.getTrendingMovie(movieType, time)
         }
 
+    }*/
+
+    override suspend fun getTrendingMovie(movieType: String, time: String): List<Movie> {
+        val cacheMovieList = movieCacheDataSource.getMovie()
+        val networkMovieList = movieNetworkDataSource.getTrendingMovie(movieType, time)
+
+        return networkMovieList
     }
 }

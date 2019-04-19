@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
@@ -8,7 +9,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -29,9 +30,17 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //implementation 'com.android.support:appcompat-v7:28.0.0'
+    //testImplementation 'junit:junit:4.12'
+    //androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    //androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation project(':data')
 
     testImplementation CommonLibs.junit
+    testImplementation AndroidArchCore.test
     testImplementation Mockito.core
     testImplementation Mockito.inline
     testImplementation Mockito.kotlin
@@ -43,12 +52,7 @@ dependencies {
 
     kaptAndroidTest Dagger.compiler
 
-
-    api OkHttp.client
-    implementation OkHttp.logger
-
-    api Retrofit.core
-    implementation Retrofit.moshi_converter
+    implementation SqlDelight.android_driver
 
     implementation Moshi.core
     kapt Moshi.code_gen
@@ -59,10 +63,4 @@ dependencies {
 
     implementation Dagger.core
     kapt Dagger.compiler
-
-    //coroutine
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
-
-
 }

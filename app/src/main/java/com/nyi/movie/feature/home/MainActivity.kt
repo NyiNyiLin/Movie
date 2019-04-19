@@ -59,7 +59,8 @@ class MainActivity : MvpActivity<MainView, MainViewModel>(), MainView {
 
 
     override fun showError(t : Throwable) {
-        showLongToast(genericErrorMessageFactory.getErrorMessage(t))
+        showLongToast(t.message.toString())
+        //showLongToast(genericErrorMessageFactory.getErrorMessage(t))
     }
 
     override fun subscribeToMovieList(acceptMovieList: LiveData<AsyncViewResource<List<Movie>>>) {
@@ -72,7 +73,7 @@ class MainActivity : MvpActivity<MainView, MainViewModel>(), MainView {
                     movieListAdapter.submitList(it.value)
                 }
                 is Error -> {
-
+                    showError(it)
                 }
             }
         })

@@ -4,8 +4,8 @@ import com.nyi.domainn.model.Movie
 import io.reactivex.Single
 
 interface MovieRepository {
-    fun getTrendingMovie(
+    suspend fun getTrendingMovie(
         movieType : String,
         time : String
-    ) : Single<List<Movie>>
+    ) : List<Movie>
 }

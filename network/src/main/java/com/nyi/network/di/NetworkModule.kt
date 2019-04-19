@@ -1,5 +1,6 @@
 package com.nyi.network.di
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.nyi.data.datasource.MovieNetworkDataSource
 import com.nyi.network.BuildConfig
 import com.nyi.network.auth.AuthTokenInterceptor
@@ -55,6 +56,7 @@ abstract class NetworkModule {
         .addInterceptor(loggerInterceptor)
         .addInterceptor(networkExceptionInterceptor)
 
+
       return builder.build()
     }
 
@@ -66,6 +68,7 @@ abstract class NetworkModule {
       builder.baseUrl("https://api.themoviedb.org/3/")
         .client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
 
       return builder.build()
     }
