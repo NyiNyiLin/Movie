@@ -23,9 +23,21 @@ class MovieRepositoryRealImpl @Inject constructor(
     }*/
 
     override suspend fun getTrendingMovie(movieType: String, time: String): List<Movie> {
-        val cacheMovieList = movieCacheDataSource.getMovie()
-        val networkMovieList = movieNetworkDataSource.getTrendingMovie(movieType, time)
 
-        return networkMovieList
+
+        try{
+            val networkMovieList = movieNetworkDataSource.getTrendingMovie(movieType, time)
+            movieCacheDataSource.putMovie(networkMovieList)
+        }catch (t : Throwable){
+
+        }
+
+        val cacheMovieList = movieCacheDataSource.getMovie()
+        return cacheMovieList
+    }
+
+    override suspend fun getLocalTrendingMovie(): List<Movie> {
+        val cacheMovieList = movieCacheDataSource.getMovie()
+        return cacheMovieList
     }
 }

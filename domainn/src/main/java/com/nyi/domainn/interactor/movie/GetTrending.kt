@@ -12,6 +12,12 @@ class GetTrending @Inject constructor(
         return movieRespository.getTrendingMovie(params.mediaType, params.time)
     }
 
+    suspend fun getLocalTrendingMovie(params: GetTrending.Params) : List<Movie>{
+        return movieRespository.getLocalTrendingMovie()
+    }
+
+
+
     /*override fun provideSingledee(params: GetTrending.Params): Single<List<Movie>> {
         return movieRespository.getTrendingMovie(params.mediaType, params.time)
     }*/

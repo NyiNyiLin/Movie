@@ -8,4 +8,6 @@ interface MovieRepository {
         movieType : String,
         time : String
     ) : List<Movie>
+
+    suspend fun getLocalTrendingMovie() : List<Movie>
 }

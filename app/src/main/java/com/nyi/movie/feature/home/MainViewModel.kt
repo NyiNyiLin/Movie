@@ -11,14 +11,13 @@ import com.nyi.domainn.model.Movie
 import com.nyi.domainn.model.MovieId
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.lang.Exception
 import javax.inject.Inject
+import kotlin.system.measureNanoTime
+import kotlin.system.measureTimeMillis
 
 class MainViewModel @Inject constructor(
     private val getTrending: GetTrending
@@ -50,10 +49,32 @@ class MainViewModel @Inject constructor(
 
             try{
 
-                val movieList = getTrending.getTrendingMovie(GetTrending.Params("movie", "day"))
+                val time = measureTimeMillis {
+
+                    val time2 = measureTimeMillis {
+                        val localMovie = getTrending.getLocalTrendingMovie(GetTrending.Params("movie", "day"))
+
+                        withContext(Dispatchers.Main){
+                            acceptMovieList.postValue(AsyncViewResource.Success(localMovie))
+                        }
+
+                    }
+
+                    withContext(Dispatchers.Main){
+                        view?.showError(Throwable("local " + time2.toString()))
+                    }
+
+
+                    val movieList = getTrending.getTrendingMovie(GetTrending.Params("movie", "day"))
+
+                    withContext(Dispatchers.Main){
+                        acceptMovieList.postValue(AsyncViewResource.Success(movieList))
+                    }
+
+                }
 
                 withContext(Dispatchers.Main){
-                    acceptMovieList.postValue(AsyncViewResource.Success(movieList))
+                    view?.showError(Throwable("network " + time.toString()))
                 }
 
             }catch (t : Throwable){
