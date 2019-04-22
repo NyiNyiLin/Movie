@@ -5,6 +5,7 @@ import com.nyi.domainn.model.Movie
 import com.nyi.network.entity.MovieListResponse
 import com.nyi.network.mapper.TrendingMapper
 import com.nyi.network.service.MovieService
+import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +21,7 @@ class movieDataSourceRealImpl @Inject constructor(
 
     override suspend fun getTrendingMovie(movieType: String, time: String): List<Movie> {
 
-
+        delay(5000)
         /*return suspendCoroutine {
 
             movieService.getTrendingMovie().enqueue(object  : Callback<MovieListResponse> {
