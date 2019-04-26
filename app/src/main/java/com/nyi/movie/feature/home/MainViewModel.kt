@@ -2,11 +2,14 @@ package com.nyi.movie.feature.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagedList
 import com.nyi.appbase.core.mvp.BaseViewModel
 import com.nyi.appbase.helper.AsyncViewResource
 import com.nyi.domainn.interactor.movie.GetTrending
 import com.nyi.domainn.model.Movie
 import com.nyi.domainn.model.MovieId
+import io.reactivex.Observable
+import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
@@ -17,6 +20,7 @@ class MainViewModel @Inject constructor(
     : BaseViewModel<MainView>(){
 
     private val acceptMovieList = MutableLiveData<AsyncViewResource<List<Movie>>>()
+
 
     override fun attachView(viewable: MainView) {
         super.attachView(viewable)
