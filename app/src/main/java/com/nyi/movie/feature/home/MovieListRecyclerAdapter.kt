@@ -1,7 +1,11 @@
 package com.nyi.movie.feature.home
 
+import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.nyi.appbase.core.recyclerview.BaseRecyclerViewAdapter
 import com.nyi.appbase.core.recyclerview.BaseViewHolder
 import com.nyi.appbase.core.recyclerview.RecyclerViewItemClickListener
@@ -9,6 +13,7 @@ import com.nyi.appbase.core.recyclerview.diffCallBackWith
 import com.nyi.appbase.helper.inflater
 import com.nyi.domainn.model.Movie
 import com.nyi.movie.R
+import com.snakydesign.livedataextensions.concat
 import kotlinx.android.synthetic.main.item_movie_list.view.*
 
 class MovieListRecyclerAdapter :
@@ -21,6 +26,7 @@ class MovieListRecyclerAdapter :
             item1 == item2
         }
     )) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = parent.inflater().inflate(R.layout.item_movie_list, parent, false)
@@ -37,8 +43,14 @@ class MovieListRecyclerAdapter :
         }
 
         override fun bind(item: Movie) {
+
             itemView.tvName.text = item.name
             itemView.tvDescription.text = item.description
+            Glide.with(itemView.context)
+                .load("https://image.tmdb.org/t/p/original/" + item.backdrop)
+                .placeholder(R.mipmap.ic_launcher)
+                .transform()
+                .into(itemView.ivImage)
         }
     }
 }

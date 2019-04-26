@@ -13,7 +13,8 @@ class MovieCacheEntityMapper @Inject constructor(){
         return MovieCache(
             movieId = movie.movieId.value,
             name = movie.name,
-            description = movie.description
+            description = movie.description,
+            backdrop = movie.backdrop
         )
     }
 
@@ -25,7 +26,8 @@ class MovieCacheEntityMapper @Inject constructor(){
                 Movie(
                     movieId = MovieId(movie.movieId),
                     name = movie.name,
-                    description = movie.description
+                    description = movie.description,
+                    backdrop = movie.backdrop
                 )
             )
         }

@@ -21,6 +21,7 @@ class TrendingMapper @Inject constructor() :
       newMovie.movieId = MovieId(item.id)
       newMovie.name = item.title
       newMovie.description = item.popularity.toString()
+      newMovie.backdrop = item.backdropPath
 
       dummyMovieList.add(newMovie)
     }

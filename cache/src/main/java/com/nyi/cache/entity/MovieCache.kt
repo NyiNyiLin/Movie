@@ -20,5 +20,9 @@ data class MovieCache(
 
     @ColumnInfo(name = "description")
     @Json(name = "description")
-    var description : String
+    var description : String,
+
+    @ColumnInfo(name = "backdrop")
+    @Json(name = "backdrop")
+    var backdrop : String
 )
