@@ -4,7 +4,6 @@ import com.nyi.data.datasource.MovieCacheDataSource
 import com.nyi.data.datasource.MovieNetworkDataSource
 import com.nyi.domainn.model.Movie
 import com.nyi.domainn.repository.MovieRepository
-import io.reactivex.Single
 import javax.inject.Inject
 
 
@@ -33,7 +32,21 @@ class MovieRepositoryRealImpl @Inject constructor(
         }
 
         val cacheMovieList = movieCacheDataSource.getMovie()
-        return cacheMovieList
+
+        val dataSourceFactory = movieCacheDataSource.getMovie()
+
+        // Construct the boundary callback
+        val boundaryCallback = RepoBoundaryCallback("asd", movieCacheDataSource, movieNetworkDataSource)
+
+        // Get the paged list
+        val data = LivePagedListBuilder(dataSourceFactory, 10)
+            .setBoundaryCallback(boundaryCallback)
+            .build()
+
+        // Get the network errors exposed by the boundary callback
+        return data
+
+        //return cacheMovieList
     }
 
     override suspend fun getLocalTrendingMovie(): List<Movie> {

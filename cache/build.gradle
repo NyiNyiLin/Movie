@@ -75,4 +75,7 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    //pagging
+    implementation "android.arch.paging:runtime:1.0.1"
 }

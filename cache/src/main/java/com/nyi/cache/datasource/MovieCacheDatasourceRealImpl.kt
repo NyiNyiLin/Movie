@@ -1,8 +1,12 @@
 package com.nyi.cache.datasource
 
+import android.arch.paging.DataSource
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.nyi.cache.MovieDatabase
+import com.nyi.cache.entity.MovieCache
 import com.nyi.cache.mapper.MovieCacheEntityMapper
 import com.nyi.data.datasource.MovieCacheDataSource
 import com.nyi.domainn.model.Movie
@@ -21,9 +25,10 @@ class MovieCacheDatasourceRealImpl @Inject constructor(
 
     private val moshi = Moshi.Builder().build()
 
-    override suspend fun getMovie(): ArrayList<Movie> {
+    override suspend fun getMovie(): DataSource<Int, List<Movie>> {
         val movieList = MovieDatabase.getDatabase(context).movieDao().getAllMovie()
-        return mapper.map(movieList)
+
+        return movieList
     }
 
     override suspend fun putMovie(movieList: List<Movie>) {

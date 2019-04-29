@@ -1,5 +1,6 @@
 package com.nyi.cache.daos
 
+import androidx.paging.DataSource
 import androidx.room.*
 import com.nyi.cache.entity.MovieCache
 import com.nyi.domainn.model.Movie
@@ -9,7 +10,7 @@ import com.nyi.domainn.model.Movie
 interface MovieDao {
 
     @Query("SELECT * from movie")
-    suspend fun getAllMovie(): List<MovieCache>
+    suspend fun getAllMovie(): DataSource<Int, List<MovieCache>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(movie : MovieCache)

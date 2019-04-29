@@ -7,6 +7,11 @@ dependencies {
     implementation Kotlin.stdblib_jdk
     testImplementation CommonLibs.junit
     api project(':domainn')
+
+    //pagging
+    def paging_version = "2.1.0"
+
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 }
 
 sourceCompatibility = "7"

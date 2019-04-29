@@ -1,5 +1,6 @@
 package com.nyi.cache.mapper
 
+import android.arch.paging.DataSource
 import com.nyi.cache.entity.MovieCache
 import com.nyi.domainn.model.Movie
 import com.nyi.domainn.model.MovieId
