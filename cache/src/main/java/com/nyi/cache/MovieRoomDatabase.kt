@@ -9,15 +9,15 @@ import com.nyi.cache.entity.MovieCache
 
 
 @Database(entities = [MovieCache::class], version = 1)
-abstract class MovieDatabase : RoomDatabase() {
+abstract class MovieRoomDatabase : RoomDatabase() {
 
     abstract fun movieDao() : MovieDao
 
     companion object {
         @Volatile
-        private var INSTANCE: MovieDatabase? = null
+        private var INSTANCE: MovieRoomDatabase? = null
 
-        fun getDatabase(context: Context): MovieDatabase {
+        fun getDatabase(context: Context): MovieRoomDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -25,7 +25,7 @@ abstract class MovieDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    MovieDatabase::class.java,
+                    MovieRoomDatabase::class.java,
                     "myDB"
                 ).build()
                 INSTANCE = instance

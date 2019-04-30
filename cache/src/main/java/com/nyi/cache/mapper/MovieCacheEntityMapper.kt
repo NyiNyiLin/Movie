@@ -35,4 +35,21 @@ class MovieCacheEntityMapper @Inject constructor(){
         return convertedList
     }
 
+    fun mapp(list : List<com.nyi.cache.entity.Movie>) : ArrayList<Movie>{
+        var convertedList = ArrayList<Movie>()
+
+        for(movie in list){
+            convertedList.add(
+                Movie(
+                    movieId = MovieId(movie.movieId.toInt()),
+                    name = movie.name,
+                    description = movie.description,
+                    backdrop = movie.backdrop
+                )
+            )
+        }
+
+        return convertedList
+    }
+
 }

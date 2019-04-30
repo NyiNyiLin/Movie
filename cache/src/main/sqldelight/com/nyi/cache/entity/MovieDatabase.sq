@@ -1,0 +1,25 @@
+
+
+CREATE TABLE movie(
+  movieId INTEGER NOT NULL PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT NOT NULL,
+  backdrop TEXT NOT NULL
+);
+
+insert_or_replace:
+INSERT OR REPLACE INTO movie(
+movieId, name, description, backdrop
+) VALUES (? ,?, ?, ?);
+
+select_all:
+SELECT * FROM movie;
+
+select_by_id:
+SELECT * FROM movie WHERE movieId = ? LIMIT 1;
+
+delete_all:
+DELETE FROM movie;
+
+delete:
+DELETE FROM movie WHERE movieId = ?;

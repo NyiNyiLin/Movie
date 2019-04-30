@@ -1,7 +1,20 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath SqlDelight.gradle_plugin
+    }
+}
+
+
 apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+
+apply plugin: 'com.squareup.sqldelight'
 
 android {
     compileSdkVersion 28
@@ -26,6 +39,14 @@ android {
     }
 
 }
+
+//sqldelight {
+//    MyDatabase {
+//        packageName = ""
+//    }
+//    className = "MovieDataBase" // Defaults to "Database"
+//    schemaOutputDirectory = file("src/main/sqldelight/migrations")
+//}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -75,4 +96,7 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    //sqdelight
+    implementation SqlDelight.android_driver
 }
