@@ -1,5 +1,3 @@
-
-
 CREATE TABLE movie(
   movieId INTEGER NOT NULL PRIMARY KEY,
   name TEXT NOT NULL,
@@ -9,7 +7,7 @@ CREATE TABLE movie(
 
 insert_or_replace:
 INSERT OR REPLACE INTO movie(
-movieId, name, description, backdrop
+    movieId, name, description, backdrop
 ) VALUES (? ,?, ?, ?);
 
 select_all:
@@ -23,3 +21,4 @@ DELETE FROM movie;
 
 delete:
 DELETE FROM movie WHERE movieId = ?;
+

@@ -16,5 +16,4 @@ interface Presentable<V : Viewable> {
    * Every Presentable must detach its Viewable
    */
   fun detachView()
-
 }

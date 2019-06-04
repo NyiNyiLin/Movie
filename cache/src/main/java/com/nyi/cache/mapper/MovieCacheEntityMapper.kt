@@ -27,7 +27,8 @@ class MovieCacheEntityMapper @Inject constructor(){
                     movieId = MovieId(movie.movieId),
                     name = movie.name,
                     description = movie.description,
-                    backdrop = movie.backdrop
+                    backdrop = movie.backdrop,
+                    headerType = 0
                 )
             )
         }
@@ -44,7 +45,8 @@ class MovieCacheEntityMapper @Inject constructor(){
                     movieId = MovieId(movie.movieId.toInt()),
                     name = movie.name,
                     description = movie.description,
-                    backdrop = movie.backdrop
+                    backdrop = movie.backdrop,
+                    headerType = 0
                 )
             )
         }

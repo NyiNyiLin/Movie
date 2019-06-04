@@ -9,6 +9,15 @@
         tools:showIn="@layout/activity_main"
         tools:context=".feature.home.MainActivity">
 
+    <TextView
+            android:id="@+id/tvMovieDummyTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="asd"
+            android:fontFamily="@font/pyidaungsu"/>
+
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMovieList"
             android:layout_width="0dp"
@@ -17,7 +26,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMovieDummyTitle"
             tools:listitem="@layout/item_movie_list"
     />
 

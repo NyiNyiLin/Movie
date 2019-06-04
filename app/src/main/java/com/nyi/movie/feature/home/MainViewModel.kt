@@ -9,12 +9,14 @@ import com.nyi.appbase.helper.AsyncViewResource
 import com.nyi.domainn.interactor.movie.GetTrending
 import com.nyi.domainn.model.Movie
 import com.nyi.domainn.model.MovieId
+import com.nyi.network.exception.NetworkException
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import java.lang.Exception
+import java.net.UnknownHostException
 import javax.inject.Inject
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
@@ -29,6 +31,7 @@ class MainViewModel @Inject constructor(
     override fun attachView(viewable: MainView) {
         super.attachView(viewable)
         view?.subscribeToMovieList(acceptMovieList)
+
     }
 
     fun refreshMovieList(){
@@ -45,7 +48,8 @@ class MainViewModel @Inject constructor(
 
         ).addTo(compositeDisposable)*/
 
-        GlobalScope.launch(Dispatchers.IO) {
+
+        scope.launch(Dispatchers.IO) {
 
             try{
 
@@ -55,7 +59,7 @@ class MainViewModel @Inject constructor(
                         val localMovie = getTrending.getLocalTrendingMovie(GetTrending.Params("movie", "day"))
 
                         withContext(Dispatchers.Main){
-                            acceptMovieList.postValue(AsyncViewResource.Success(localMovie))
+                            //acceptMovieList.postValue(AsyncViewResource.Success(localMovie))
                         }
 
                     }
@@ -77,10 +81,20 @@ class MainViewModel @Inject constructor(
                     view?.showError(Throwable("network " + time.toString()))
                 }
 
-            }catch (t : Throwable){
+            }catch (e : Exception){
                 withContext(Dispatchers.Main){
-                    view?.showError(t)
+                    if(e is UnknownHostException){
+                        view?.showError(Throwable("No host"))
+                    }else if(e is NetworkException){
+                        view?.showError(Throwable("No Network"))
+                    }else{
+
+                    }
+
+                    //view?.showError(t)
                     //acceptMovieList.postValue(AsyncViewResource.Error(t))
+
+
                 }
             }
 

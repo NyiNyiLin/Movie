@@ -10,4 +10,6 @@ interface MovieService {
     @GET("trending/movie/day?api_key=b0162e9de9b7dbdcf03f01443c6fce34")
     fun getTrendingMovie(
     ): Deferred<MovieListResponse>
+
+
 }
